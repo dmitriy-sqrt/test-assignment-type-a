@@ -9,7 +9,7 @@ However, there are some points to improve, such as:
   - minor code improvements (`TODO:`s left in the code)
 
 
-Made by Dmitry K. (altneox@gmail.com, skype: dimonjikz)
+Made by Dmitry K.
 -----------------------------------------
 
 # Simplified setup
