@@ -1,0 +1,11 @@
+b = link_to 'Upload new report', new_invoice_report_path
+
+hr
+
+table
+  tr
+    th Id
+    th Customer
+    th Uploaded at
+
+  = render collection: @reports, partial: 'report'

@@ -1,0 +1,12 @@
+h1
+  | Vieweing Report #
+  =< @report.id
+
+p = @report.created_at
+
+hr
+
+b = link_to 'Back', invoice_reports_path
+
+p = @report.summary
+
