@@ -15,7 +15,23 @@
 require 'test_helper'
 
 class InvoiceTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'early upload' do
+    due_date_for_early = (Invoice::EARLY_UPLOAD_INTERVAL + 10.days).from_now
+    setup_invoice(due_date: due_date_for_early)
+
+    assert_equal @invoice.price, Invoice::EARLY_COEFFICIENT
+  end
+
+  test 'standard upload' do
+    setup_invoice(due_date: Date.today)
+
+    assert_equal @invoice.price, Invoice::STANDARD_COEFFICIENT
+  end
+
+  private
+
+  def setup_invoice(due_date:)
+    @invoice = Invoice.new(due_date: due_date, amount: 1)
+    @invoice.save(validate: false)
+  end
 end
