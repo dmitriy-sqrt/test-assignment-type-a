@@ -2,11 +2,19 @@ h1
   | Vieweing Report #
   =< @report.id
 
-p = @report.created_at
+p
+  b Uploaded at:
+  = @report.created_at
+
+hr
+ h3 Invoices
+ = render 'invoices', invoices: @report.invoices
 
 hr
 
 b = link_to 'Back', invoice_reports_path
 
-p = @report.summary
+h3 Processing summary:
+p
+  pre = @report.summary
 

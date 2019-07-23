@@ -1,0 +1,15 @@
+table
+  tr
+    th Id
+    th Internal id
+    th Due date
+    th Amount
+    th Price
+
+  - invoices.each do |invoice|
+    tr
+      td = invoice.id
+      td = invoice.internal_id
+      td = invoice.due_date
+      td = invoice.amount
+      td = invoice.price

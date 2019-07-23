@@ -11,6 +11,8 @@
 #
 
 class InvoiceReport < ApplicationRecord
+  has_many :invoices
+
   validates :csv, presence: true
   validates :customer_id, presence: true
 end
