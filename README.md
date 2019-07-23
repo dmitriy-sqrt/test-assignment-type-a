@@ -1,5 +1,15 @@
 # Test assignment: Type A
 
+Invoice upload feature is implemented and basically fulfill requested scenario.
+However, there are some points to improve, such as:
+  - specs (never used minitest before, so they could be improved, both in style and coverage)
+  - more sophisticated errors handling on invoice report processing
+  - expand report upload summary with happy case info
+  - allow users to view/download copy of original report csv (its stored in db now)
+  - minor code improvements (`TODO:`s left in the code)
+
+
+Made by Dmitry K. (altneox@gmail.com, skype: dimonjikz)
 -----------------------------------------
 
 # Simplified setup
