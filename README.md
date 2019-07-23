@@ -1,69 +1,19 @@
 # Test assignment: Type A
 
-This is a test assignment. We have developed a simple assignment to imitate real system situation. Test assignment should show the candidate ability to system thinking, coding style, and code versioning skills.
-
-Test assignment consists of two parts. First looks like README and guides you through infrastructure part to build. Second, described one feature to implement.
-
-### Pre-requirements
-
-- Ruby on Rails framework experience
-- Minitest as a testing framework
-- Front-end level basic JavsScript experience
-- Docker infrastructure experience
-
 -----------------------------------------
 
-# Getting started
-
-TypeA uses docker for simplifying deployment, development, and test process. So you should install docker and docker-compose first.
-
-# Installation
-
-TypeA project running on ruby 2.6 docker image.
-
-First, you have to build an image:
+# Simplified setup
 
 ```
-docker build supplierplus/type-a
-```
+sudo docker build .
 
-Second, you have to set `.env` file according to your preferences
+docker-compose run --rm app bundle
 
-Third, setup database.
-
-```
 docker-compose run --rm app rails db:setup
-docker-compose run --rm app rails db:seed
-```
 
-Finally, run:
+docker-compose run --rm app rake db:test:prepare
 
-```
 docker-compose up -d
-```
-
-You can select a current user on login; for simplicity reason, there are no requirements to authentication.
-
-# Development
-
-```
-Dev setup:
-docker-compose -f docker-compose.development.yml run --rm app bundle
-docker-compose -f docker-compose.development.yml run --rm app rails db:setup
-
-Dev run:
-docker-compose -f docker-compose.development.yml up
-```
-
-# Test
-
-```
-Test setup:
-docker-compose -f docker-compose.test.yml run --rm app bundle install --without development
-docker-compose -f docker-compose.test.yml run --rm app rails db:setup
-
-Dev run:
-docker-compose -f docker-compose.test.yml rails test
 ```
 
 --------------------------------------------
