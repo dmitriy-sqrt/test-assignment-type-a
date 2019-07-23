@@ -7,6 +7,7 @@ gem 'rails', '~> 5.2.2'
 
 gem 'annotate', git: 'https://github.com/ctran/annotate_models.git'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'carrierwave'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'

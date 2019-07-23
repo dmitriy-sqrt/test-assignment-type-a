@@ -15,4 +15,6 @@ class InvoiceReport < ApplicationRecord
 
   validates :csv, presence: true
   validates :customer_id, presence: true
+
+  mount_uploader :csv, InvoiceReportUploader
 end

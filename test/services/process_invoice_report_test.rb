@@ -38,11 +38,7 @@ describe ProcessInvoiceReport do
   context 'processing' do
     describe 'with all valid invoices' do
       before do
-        @result = process_report(
-          '1,100,2019-05-20
-           2,200.5,2019-05-10
-           B,300,2019-05-01'
-        )
+        @result = process_report('fully_valid_invoice_report.csv')
       end
 
       it 'creates report and imports all invoices' do
@@ -53,11 +49,7 @@ describe ProcessInvoiceReport do
 
     describe 'with 2 valid invoices' do
       before do
-        @result = process_report(
-          '1,100,2019-05-20
-          2,invalid,2019-05-10
-          B,,'
-        )
+        @result = process_report('partially_valid_invoice_report.csv')
       end
 
       it 'creates report and imports valid invoices' do
@@ -74,7 +66,11 @@ describe ProcessInvoiceReport do
     ProcessInvoiceReport::InvoiceRow.new(row: csv.first, row_number: 1)
   end
 
-  def process_report(csv)
+  def process_report(csv_path)
+    # TODO: extract to shared helper
+    path = Rails.root.join('test/fixtures/files', csv_path)
+    csv = Rack::Test::UploadedFile.new(path)
+
     ProcessInvoiceReport.new(csv: csv, customer: OpenStruct.new(id: 1)).call
   end
 end

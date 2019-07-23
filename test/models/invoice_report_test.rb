@@ -14,7 +14,11 @@ require 'test_helper'
 
 class InvoiceReportTest < ActiveSupport::TestCase
   test 'valid fixture' do
-    report = InvoiceReport.new(customer_id: 1, csv: 'csv')
+    # TODO: extract to shared helper
+    path = Rails.root.join('test/fixtures/files/fully_valid_invoice_report.csv')
+    csv = Rack::Test::UploadedFile.new(path)
+
+    report = InvoiceReport.new(customer_id: 1, csv: csv)
     assert report.valid?
   end
 

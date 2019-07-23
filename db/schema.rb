@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2019_07_23_082027) do
   create_table "invoice_reports", force: :cascade do |t|
     t.integer "customer_id"
     t.text "summary"
-    t.text "csv"
+    t.string "csv"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

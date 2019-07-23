@@ -58,7 +58,7 @@ class ProcessInvoiceReport < BaseService
   private
 
   def process_csv_rows
-    csv = CSV.new(@csv, headers: false)
+    csv = CSV.new(@invoice_report.csv.read, headers: false)
 
     csv.each_with_index do |row, number|
       process_row(row: row, number: number)
