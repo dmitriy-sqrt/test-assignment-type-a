@@ -16,8 +16,7 @@ describe ProcessInvoiceReport do
 
     describe 'invalid' do
       before do
-        csv = CSV.new('invalid csv', headers: false)
-        @row = ProcessInvoiceReport::InvoiceRow.new(row: csv.first, row_number: 1)
+        @row = prepare_row('invalid csv')
       end
 
       it 'is invalid with faulty data' do
@@ -27,8 +26,7 @@ describe ProcessInvoiceReport do
 
     describe 'valid' do
       before do
-        csv = CSV.new('B,300,2019-05-01', headers: false)
-        @row = ProcessInvoiceReport::InvoiceRow.new(row: csv.first, row_number: 1)
+        @row = prepare_row('B,300,2019-05-01')
       end
 
       it 'is valid with correct data' do
@@ -40,11 +38,11 @@ describe ProcessInvoiceReport do
   context 'processing' do
     describe 'with all valid invoices' do
       before do
-        csv = '1,100,2019-05-20
-               2,200.5,2019-05-10
-               B,300,2019-05-01'
-
-        @result = ProcessInvoiceReport.new(csv: csv, customer: OpenStruct.new(id: 1)).call
+        @result = process_report(
+          '1,100,2019-05-20
+           2,200.5,2019-05-10
+           B,300,2019-05-01'
+        )
       end
 
       it 'creates report and imports all invoices' do
@@ -55,11 +53,11 @@ describe ProcessInvoiceReport do
 
     describe 'with 2 valid invoices' do
       before do
-        csv = '1,100,2019-05-20
-               2,invalid,2019-05-10
-               B,,'
-
-        @result = ProcessInvoiceReport.new(csv: csv, customer: OpenStruct.new(id: 1)).call
+        @result = process_report(
+          '1,100,2019-05-20
+          2,invalid,2019-05-10
+          B,,'
+        )
       end
 
       it 'creates report and imports valid invoices' do
@@ -67,5 +65,16 @@ describe ProcessInvoiceReport do
         Invoice.count.must_equal 1
       end
     end
+  end
+
+  private
+
+  def prepare_row(data)
+    csv = CSV.new(data, headers: false)
+    ProcessInvoiceReport::InvoiceRow.new(row: csv.first, row_number: 1)
+  end
+
+  def process_report(csv)
+    ProcessInvoiceReport.new(csv: csv, customer: OpenStruct.new(id: 1)).call
   end
 end
